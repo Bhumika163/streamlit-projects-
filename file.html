@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f4f7;
+        }
+
+        .navbar {
+            background-color: #1f3c88;
+            display: flex;
+            padding: 10px;
+        }
+
+        .navbar button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .navbar button:hover {
+            background-color: #163172;
+        }
+
+        .tab {
+            display: none;
+            background-color: white;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 6px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 15px 0;
+        }
+
+        .btn {
+            background-color: #1f3c88;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #163172;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1f3c88;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <button onclick="openTab('home')">Home</button>
+        <button onclick="openTab('student')">Student Information</button>
+        <button onclick="openTab('records')">Student Records</button>
+    </div>
+
+    <div id="home" class="tab">
+        <h2>Home</h2>
+        <p>
+            Welcome to the Student Information Portal.
+            Use this website to enter student details and view them in table form.
+        </p>
+    </div>
+
+    <div id="student" class="tab">
+        <h2>Student Information</h2>
+
+        <label>Name</label>
+        <input type="text" id="name" placeholder="Enter name">
+
+        <label>Age</label>
+        <input type="number" id="age" placeholder="Enter age">
+
+        <label>Course</label>
+        <input type="text" id="course" placeholder="Enter course">
+
+        <button class="btn" onclick="addStudent()">Submit</button>
+    </div>
+
+    <div id="records" class="tab">
+        <h2>Student Records</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            let tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
+            }
+            document.getElementById(tabId).style.display = "block";
+        }
+
+        function addStudent() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let course = document.getElementById("course").value;
+
+            if (name === "" || age === "" || course === "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let table = document.getElementById("tableBody");
+            let row = table.insertRow();
+
+            row.insertCell(0).innerHTML = name;
+            row.insertCell(1).innerHTML = age;
+            row.insertCell(2).innerHTML = course;
+
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("course").value = "";
+
+            openTab('records');
+        }
+
+        openTab('home');
+    </script>
+
+</body>
+</html>
