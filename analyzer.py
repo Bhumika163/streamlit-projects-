@@ -15,6 +15,9 @@ if uploaded_file is not None:
 
     # Clean column names (important)
     df.columns = df.columns.str.strip().str.lower()
+    df["subject"] = df["subject"].astype(str).str.strip().str.title()
+    
+
 
     st.subheader("📋 Student Database")
     st.dataframe(df)
